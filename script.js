@@ -1,8 +1,22 @@
-alert("This is your calculator");
+let buttons = document.querySelectorAll(".all-buttons button");
+let output = document.getElementById("output");
 
-        // Wait until the DOM is fully loaded before running the script
-        let buttonSeven = document.getElementById('seven');
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        let value = button.innerText;
 
-        buttonSeven.addEventListener('click', function () {
-            buttonSeven.textContent = '70';
-        });
+        if (value === "AC") {
+            output.value = "";
+        } else if (value === "DEL") {
+            output.value = output.value.slice(0, -1);
+        } else if (value === "=") {
+            try {
+                output.value = eval(output.value);
+            } catch {
+                output.value = "Error";
+            }
+        } else {
+            output.value += value;
+        }
+    });
+});
